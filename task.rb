@@ -54,7 +54,7 @@ def q7
   array = ["1", "2", "3", "4", "5"]
 
   # 以下に回答を記載
-  p array.map(&:to_i)
+  p array.map!(&:to_i)
 end
 
 def q8
@@ -73,8 +73,8 @@ def q9
   names = ["田中", "佐藤", "佐々木", "高橋"]
 
   # 以下に回答を記載
-  names.each_with_index do |name, index|
-    puts "会員No.#{index+1} #{name}さん"
+  names.each.with_index(1) do |name, index|
+    puts "会員No.#{index} #{name}さん"
   end
 
 end
@@ -100,8 +100,8 @@ def q11
   puts "ユーザーの趣味一覧"
 
   sports.flatten!.uniq!
-  sports.each_with_index do |sport, index|
-    puts "No#{index+1} #{sport}"
+  sports.each.with_index(1) do |sport, index|
+    puts "No#{index} #{sport}"
   end
 end
 
@@ -117,9 +117,7 @@ def q13
   update_data = { age: 32, address: "沖縄" }
 
   # 以下に回答を記載
-  user_data[:age] = 32
-  user_data[:address] = "沖縄"
-
+  user_data.merge!(update_data)
   puts user_data
 end
 
