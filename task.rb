@@ -119,6 +119,7 @@ def q13
   # 以下に回答を記載
   user_data.merge!(update_data)
   puts user_data
+
 end
 
 def q14
@@ -135,6 +136,17 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
+  if data1.key?(:age)
+    puts "OK"
+  else
+    puts "NG"
+  end
+
+  if data2.key?(:age)
+    puts "OK"
+  else
+    puts "NG"
+  end
 
 end
 
@@ -147,12 +159,36 @@ def q16
   ]
 
   # 以下に回答を記載
+  users.each do |user|
+    puts "私の名前は#{user[:name]}です。年齢は#{user[:age]}です。"
+  end
 
 end
 
 class UserQ17
   # 以下に回答を記載
+  def initialize(**params)
+    @name = params[:name]
+    @age = params[:age]
+    @gender = params[:gender]
+    @admin = params[:admin]
+  end
 
+  def info
+    if @admin == true
+      admin = "有り"
+    else
+      admin = "無し"
+    end
+
+    puts <<-E0S
+    名前：#{@name}
+    年齢：#{@age}
+    性別：#{@gender}
+    管理者権限：#{admin}
+    E0S
+
+  end
 end
 
 def q17
@@ -167,7 +203,18 @@ end
 
 class UserQ18
   # 以下に回答を記載
+  def initialize(**params)
+    @name = params[:name]
+    @age = params[:age]
+  end
 
+  def introduce
+    if @age > 20
+      "こんにちは、#{@name}と申します。宜しくお願いいたします。"
+    else
+      "はいさいまいど〜、#{@name}です！！！"
+    end
+  end
 end
 
 def q18
@@ -181,9 +228,10 @@ end
 
 class Item
   # 以下を修正して下さい
+  attr_reader :name
 
-  def initialize(name)
-    @name = name
+  def initialize(**params)
+    @name = params[:name]
   end
 end
 
@@ -195,11 +243,34 @@ end
 
 class UserQ20
   # 以下に回答を記載
+  attr_reader :name, :age
+
+  def initialize(**params)
+    @name = params[:name]
+    @age = params[:age]
+  end
 
 end
 
 class Zoo
   # 以下に回答を記載
+  def initialize(**params)
+    @name = params[:name]
+    @entry_price = params[:entry_fee]
+  end
+
+  def info_entry_fee(user)
+    case user.age
+      when 0..5
+        puts "#{user.name}さんの入場料金は#{@entry_price[:infant]}円です。"
+      when 6..12
+        puts "#{user.name}さんの入場料金は#{@entry_price[:children]}円です。"
+      when 13..64
+        puts "#{user.name}さんの入場料金は#{@entry_price[:adult]}円です。"
+      when 65..120
+        puts "#{user.name}さんの入場料金は#{@entry_price[:senior]}円です。"
+    end
+  end
 
 end
 
