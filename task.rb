@@ -136,17 +136,8 @@ def q15
   data2 = { name: "yamada", hobby: "baseball", role: "normal" }
 
   # 以下に回答を記載
-  if data1.key?(:age)
-    puts "OK"
-  else
-    puts "NG"
-  end
-
-  if data2.key?(:age)
-    puts "OK"
-  else
-    puts "NG"
-  end
+  puts data1.key?(:age) ? "OK" : "NG"
+  puts data2.key?(:age) ? "OK" : "NG"
 
 end
 
@@ -175,12 +166,7 @@ class UserQ17
   end
 
   def info
-    if @admin == true
-      admin = "有り"
-    else
-      admin = "無し"
-    end
-
+    admin = @admin ? "有り" : "無し"
     puts <<-E0S
     名前：#{@name}
     年齢：#{@age}
@@ -230,8 +216,8 @@ class Item
   # 以下を修正して下さい
   attr_reader :name
 
-  def initialize(**params)
-    @name = params[:name]
+  def initialize(name:)
+    @name = name
   end
 end
 
@@ -256,19 +242,22 @@ class Zoo
   # 以下に回答を記載
   def initialize(**params)
     @name = params[:name]
-    @entry_price = params[:entry_fee]
+    @infant = params[:entry_fee][:infant]
+    @children = params[:entry_fee][:children]
+    @adult = params[:entry_fee][:adult]
+    @senior = params[:entry_fee][:senior]
   end
 
   def info_entry_fee(user)
     case user.age
       when 0..5
-        puts "#{user.name}さんの入場料金は#{@entry_price[:infant]}円です。"
+        puts "#{user.name}さんの入場料金は#{@infant}円です。"
       when 6..12
-        puts "#{user.name}さんの入場料金は#{@entry_price[:children]}円です。"
+        puts "#{user.name}さんの入場料金は#{@children}円です。"
       when 13..64
-        puts "#{user.name}さんの入場料金は#{@entry_price[:adult]}円です。"
+        puts "#{user.name}さんの入場料金は#{@adult}円です。"
       when 65..120
-        puts "#{user.name}さんの入場料金は#{@entry_price[:senior]}円です。"
+        puts "#{user.name}さんの入場料金は#{@senior}円です。"
     end
   end
 
